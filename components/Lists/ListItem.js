@@ -1,65 +1,45 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
- 
-} from 'react-native';
-import { CheckBox, Button,  } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import { View, Text, TextInput, StyleSheet, TouchableHighlight, } from 'react-native';
+import { CheckBox, Button, } from 'react-native-elements';
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { StackNavigator } from 'react-navigation';
 export default class ListItem extends React.Component {
-  
-  constructor(props) {
-    super(props);
-  }
 
-
-    render() {
-        return <View style={styles.container} >
-                <View style={styles.containerspot} >
-                  <Text style={styles.textInput} onPress={()=>this._gotolistitem234()}>{this.props.item.massage}</Text>
-                    {/* <Text style={styles.textInput}>{this.props.item.id}</Text> */}
-                    <Text style={styles.textInput} >{this.props.item.name}</Text>
-                    </View>
-                    <View style={styles.containericon}>
-                    <Entypo name="list" size={20} color="black" style={styles.icon}/>
-                    </View>
-                </View>
+    constructor(props) {
+        super(props);
     }
-    _gotolistitem234 = () => {
-        this.props.myprops3()
-      }
+    render() {
+        return <View style={styles.container}>
+            <TouchableHighlight style={styles.button1} underlayColor='grey' onPress={() => this.props.goToListItem(this.props.item)}>
+                <View style={styles.cont}>
+                    <Text style={styles.text}>{this.props.item.items.length}</Text>
+                    <Text style={styles.text} >{this.props.item.title}</Text>
+                    <Entypo name="list" size={20} color="grey"/>
+                    <MaterialIcons name="delete" size={20} color="grey" style={styles.icon} onPress={() => this.props.removeList(this.props.item)} />
+                </View>
+            </TouchableHighlight>
+        </View>
+    }
 }
 
 
 const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor:'rgba(255,255,255,0.9)',
+    button1:{
         borderColor:'#fff',
-        borderRadius:10,
-        borderWidth:0.6, 
-        margin :2,
-        },
-    containerspot:{
-        flexDirection:"row",
-        flex:1,
+        borderRadius:5,
+        borderWidth:1, 
+        borderColor: 'black',
+        backgroundColor: 'rgb(242, 242, 242)',
+        margin:2
     },
-    textInput:{
-        color:'#000000',
-        padding:15, 
+    cont: {
+        flexDirection:'row',
+        alignItems: "center",
+        justifyContent: 'space-between',
+        padding:5,
+        margin:5,
     },
-    icon:{
-        padding:15, 
-        color:"grey",
-    },
-    containericon:{
-        flexDirection:"row",
-        flex:1,
-        justifyContent:'flex-end',
-flex:1,
+    text: {
+        color: '#000000',
     },
 }
